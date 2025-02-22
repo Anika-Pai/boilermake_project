@@ -31,3 +31,7 @@ data['cleaned_text'] = data['text'].apply(preprocess_text)
 X = data['cleaned_text']
 y = data['label']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+vectorizer = TfidVectorizer(max_features=5000)
+X_train_tfidf = vectorizer.fit_transform (X_train).toarray()
+X_test_tfidf = vectorizer.transform(X_test).toarray()
