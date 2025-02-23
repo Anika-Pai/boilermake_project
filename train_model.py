@@ -35,3 +35,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 vectorizer = TfidVectorizer(max_features=5000)
 X_train_tfidf = vectorizer.fit_transform (X_train).toarray()
 X_test_tfidf = vectorizer.transform(X_test).toarray()
+
+model = LogisticRegression()
+model.fit(X_train_tfidf, y_train)
+
+with open('fake_news_model.pkl', 'wb') as f:
+    pickle.dump(model, f)
+
+with open('tfidf_vectorizer.pkl', 'wb') as f:
+    pickle.dump(vectorizer, f)
+
+print("Model trained and saved.")
